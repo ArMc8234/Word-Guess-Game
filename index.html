@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Word Guess Game</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" class="jumbotron">
+                <h1>Prince Hangman</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" id="revealSpace"></div>
+                <div class="col-md-6" id="gameboard">
+                        <div id="dashboard">
+                                <p id="directions-text">Press any key to get started!</p>
+                                <p id="currentWord-text"></p>
+                                <p id ="hiddenWord-text"></p>
+                                <p id="wins-text"></p>
+                                <p id="guessesRemaining-text"></p>
+                                <p id="letguess-header">Letters already guessed</p>
+                                <p id="lettersGuessed-text"></p>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script type="text/javascript">
+        //    <!--Variables for choices, wins, guesses left, and incorrect letters             guessed--!>
+
+            // var wins=0;
+            // var guessesRemaining=8;
+            // var lettersGuessed=[];
+            // var lettersdisplayed=[];
+            // var lettershidden=[];
+
+
+            // var computerChoices=puzzle[Math.floor(Math.random()*puzzle.length)];
+            // var puzzles = ["Purple Rain", "Little Red Corvette","When Doves Cry","Kiss","Diamonds and Pearls","Nineteen ninety nine","Raspberry Beret","I Wanna Be Your Lover", "Let's Go Crazy","Controversy","U Got the Look"];
+
+            // document.onkeyup = function(event) {
+            // var userGuess=event.key;
+            // var gameArray  = Object.keys(puzzles);
+            // var randomNumber = Math.random();
+            // var puzzleIndex  = Math.floor(randomNumber * gameArray.length);
+
+            // var randomKey    = gameArray[puzzleIndex];
+            // This will course this will return the value of the randomKey
+            // instead of a fresh random value
+            // var randomValue  = puzzles[randomKey]; 
+
+
+            var hangman = {
+                "wins": 0,
+                "guessesRemaining": 8,
+                "lettersGuessed": [],
+                "lettersdisplayed": [],
+                "lettershidden": [],
+                "puzzles": ["Purple Rain", "Little Red Corvette","When Doves Cry","Kiss","Diamonds and Pearls","Nineteen ninety nine","Raspberry Beret","I Wanna Be Your Lover", 
+                 "Let's Go Crazy","Controversy","U Got the Look"]
+            }
+
+        
+         
+            var directionsText = document.getElementById("directions-text");
+            var hiddenWord = document.getElementById("hiddenWord-text");
+            var winsText = document.getElementById("wins-text");
+            var guessesRemaining = document.getElementById("guessesRemaining-text");
+            var lettersGuessed = document.getElementById("lettersGuessed-text");     
+
+          
+         //start game with any key: computer picks a puzzle//
+           document.onkeyup = function(event) {
+            var userStart = event.key;
+            var randomChoice = hangman.puzzles[Math.floor(Math.random()*hangman.puzzles.length)];
+            
+            var currentWord = randomChoice;
+            console.log(currentWord);
+
+            var hiddenWord = currentWord;
+
+            // display the current word as dashes//
+            // function replaceLettersWithDashes(hiddenWord) {
+            // return hiddenWord.replace(/[a-z]/gi , '-');
+// }
+
+            var hiddenWordtext = document.getElementById("hiddenWord-text");
+            hiddenWordtext.textContent = "The current word is:   "  + currentWord.replace(/[a-zA-Z]/g , '-');   
+
+            // document.onkeyup = function(event) {
+            // var userGuess = event.key;
+            
+            // if (currentWord.indexOf(userGuess) === -1) {
+            //     lettersGuessed.textContent = userGuess;
+            // }
+            // else {
+            //     alert("yay!")
+            // }
+         };
+             
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</body>
+</html>
