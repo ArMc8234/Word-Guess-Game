@@ -22,9 +22,9 @@
                         <div id="dashboard">
                                 <p id="directions-text">Press any key to get started!</p>
                                 <p id="currentWord-text"></p>
-                                <p id ="hiddenWord-text"></p>
+                                <h1 id ="hiddenWord-text"></h1>
                                 <p id="wins-text"></p>
-                                <p id="guessesRemaining-text"></p>
+                                <p id="guessesRemaining-text">You have 8 guesses remaining</p>
                                 <p id="letguess-header">Letters already guessed</p>
                                 <p id="lettersGuessed-text"></p>
                         </div>
@@ -60,12 +60,11 @@
 
             var hangman = {
                 "wins": 0,
-                "guessesRemaining": 8,
+                "guessesLeft": 8,
                 "lettersGuessed": [],
                 "lettersdisplayed": [],
                 "lettershidden": [],
-                "puzzles": ["Purple Rain", "Little Red Corvette","When Doves Cry","Kiss","Diamonds and Pearls","Nineteen ninety nine","Raspberry Beret","I Wanna Be Your Lover", 
-                 "Let's Go Crazy","Controversy","U Got the Look"]
+                "puzzles": ["purple rain", "little red corvette","when doves cry","kiss","diamonds and pearls","nineteen ninety nine","raspberry beret","i wanna be your lover", "let's go crazy","controversy","u got the look"]
             }
 
         
@@ -93,19 +92,53 @@
 // }
 
             var hiddenWordtext = document.getElementById("hiddenWord-text");
-            hiddenWordtext.textContent = "The current word is:   "  + currentWord.replace(/[a-zA-Z]/g , '-');   
+            hiddenWordtext.textContent = "The current word is:   "  + hiddenWord.replace(/[a-zA-Z]/g , '-');   
 
-            // document.onkeyup = function(event) {
-            // var userGuess = event.key;
+            document.onkeyup = function(event) {
+            var userGuess = event.key;
             
-            // if (currentWord.indexOf(userGuess) === -1) {
-            //     lettersGuessed.textContent = userGuess;
-            // }
-            // else {
-            //     alert("yay!")
-            // }
-         };
+            
+            if (currentWord.indexOf(userGuess) === -1) {
+                hangman.lettersGuessed.push(userGuess);
+                lettersGuessed.textContent = hangman.lettersGuessed;
+                hangman.guessesLeft --;
+                guessesRemaining.textContent = "You have " + hangman.guessesLeft + " guesses remaining.";
+
+            }
+            else if (currentWord.indexOf(userGuess) !== -1) {
+                console.log(currentWord.indexOf(userGuess));
+                String.prototype.replaceAt=function(index, replacement) {
+                 return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+                    }
+                var solvedWord = currentWord;
+                alert(hello.replaceAt(2, "!!"));
+                // hiddenWord.replace('_', )
+                
+                //  function getAllIndexes(currentWord) {
+                        // var indexes = [], i;
+                        // for(i = 0; i < hiddentWord.length; i++) {
+                        //         hiddenWord.replacecharAt([i], userGuess);
+                        //         return hiddenWord.replace;
+                        //         hiddenWordtext.textContent = "The current word is:  " + hiddenWord.replace;
+                            // }
+            }
+
+                        //         indexes.push(i);
+                        // return indexes;
+                        // console.log(indexes);
+            
+            else if (hangman.guessesLeft === 0) {
+            alert("game over!");
+            
+            }
+            }
+
+           };
+
              
+
+
+
         </script>
 
 
