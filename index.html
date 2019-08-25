@@ -21,10 +21,10 @@
                 <div class="col-md-6" id="gameboard">
                         <div id="dashboard">
                                 <p id="directions-text">Press any key to get started!</p>
-                                <p id="currentWord-text"></p>
+                                <p id="currentWord-text">Guess the word below!</p>
                                 <h1 id ="hiddenWord-text"></h1>
                                 <p id="wins-text"></p>
-                                <p id="guessesRemaining-text">You have 8 guesses remaining</p>
+                                <p id="guessesRemaining-text">Guesses remaining: 8</p>
                                 <p id="letguess-header">Letters already guessed</p>
                                 <p id="lettersGuessed-text"></p>
                         </div>
@@ -34,110 +34,112 @@
         </div>
 
         <script type="text/javascript">
+            
+
         //    <!--Variables for choices, wins, guesses left, and incorrect letters             guessed--!>
-
-            // var wins=0;
-            // var guessesRemaining=8;
-            // var lettersGuessed=[];
-            // var lettersdisplayed=[];
-            // var lettershidden=[];
-
-
-            // var computerChoices=puzzle[Math.floor(Math.random()*puzzle.length)];
-            // var puzzles = ["Purple Rain", "Little Red Corvette","When Doves Cry","Kiss","Diamonds and Pearls","Nineteen ninety nine","Raspberry Beret","I Wanna Be Your Lover", "Let's Go Crazy","Controversy","U Got the Look"];
-
-            // document.onkeyup = function(event) {
-            // var userGuess=event.key;
-            // var gameArray  = Object.keys(puzzles);
-            // var randomNumber = Math.random();
-            // var puzzleIndex  = Math.floor(randomNumber * gameArray.length);
-
-            // var randomKey    = gameArray[puzzleIndex];
-            // This will course this will return the value of the randomKey
-            // instead of a fresh random value
-            // var randomValue  = puzzles[randomKey]; 
-
-
-            var hangman = {
-                "wins": 0,
-                "guessesLeft": 8,
-                "lettersGuessed": [],
-                "lettersdisplayed": [],
-                "lettershidden": [],
-                "puzzles": ["purple rain", "little red corvette","when doves cry","kiss","diamonds and pearls","nineteen ninety nine","raspberry beret","i wanna be your lover", "let's go crazy","controversy","u got the look"]
-            }
-
-        
+            var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+            var wins =  0;
+            var guessesLeft = 8;
+            var wrongLetters = [];
+            var correctLetters = [];
+            var puzzles = ["purple rain", "little red corvette","when doves cry","kiss","diamonds and pearls","nineteen ninety nine","raspberry beret","i wanna be your lover", "let's go crazy","controversy","u got the look"];
          
             var directionsText = document.getElementById("directions-text");
-            var hiddenWord = document.getElementById("hiddenWord-text");
+            var hiddenWordtext = document.getElementById("hiddenWord-text");
             var winsText = document.getElementById("wins-text");
-            var guessesRemaining = document.getElementById("guessesRemaining-text");
-            var lettersGuessed = document.getElementById("lettersGuessed-text");     
-
+            var guessesLeftTxt = document.getElementById("guessesRemaining-text");
+            var wrongLettersdtext = document.getElementById("lettersGuessed-text");     
+            var hiddenWordtext = document.getElementById("hiddenWord-text");
           
          //start game with any key: computer picks a puzzle//
-           document.onkeyup = function(event) {
-            var userStart = event.key;
-            var randomChoice = hangman.puzzles[Math.floor(Math.random()*hangman.puzzles.length)];
-            
-            var currentWord = randomChoice;
-            console.log(currentWord);
-
-            var hiddenWord = currentWord;
-
-            // display the current word as dashes//
-            // function replaceLettersWithDashes(hiddenWord) {
-            // return hiddenWord.replace(/[a-z]/gi , '-');
-// }
-
-            var hiddenWordtext = document.getElementById("hiddenWord-text");
-            hiddenWordtext.textContent = "The current word is:   "  + hiddenWord.replace(/[a-zA-Z]/g , '-');   
-
             document.onkeyup = function(event) {
-            var userGuess = event.key;
-            
-            
-            if (currentWord.indexOf(userGuess) === -1) {
-                hangman.lettersGuessed.push(userGuess);
-                lettersGuessed.textContent = hangman.lettersGuessed;
-                hangman.guessesLeft --;
-                guessesRemaining.textContent = "You have " + hangman.guessesLeft + " guesses remaining.";
-
-            }
-            else if (currentWord.indexOf(userGuess) !== -1) {
-                console.log(currentWord.indexOf(userGuess));
-                String.prototype.replaceAt=function(index, replacement) {
-                 return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
-                    }
-                var solvedWord = currentWord;
-                alert(hello.replaceAt(2, "!!"));
-                // hiddenWord.replace('_', )
+                console.log("first onkeyup");
+                var userStart = event.key;
                 
-                //  function getAllIndexes(currentWord) {
-                        // var indexes = [], i;
-                        // for(i = 0; i < hiddentWord.length; i++) {
-                        //         hiddenWord.replacecharAt([i], userGuess);
-                        //         return hiddenWord.replace;
-                        //         hiddenWordtext.textContent = "The current word is:  " + hiddenWord.replace;
-                            // }
+                var solution = puzzles[Math.floor(Math.random()*puzzles.length)];
+                var displayWord = solution.replace(/[a-zA-Z]/g , '-').split('');
+                console.log(solution);
+                console.log(displayWord);
+                var displayWordCombo = displayWord.join('');
+                hiddenWordtext.textContent = displayWordCombo;
+                
+
+                document.onkeyup = function(event) {
+                    
+                    console.log("second onkeyup");
+                    var userGuess = event.key;
+
+                    if (alphabet.includes(userGuess)) {
+
+                        if (solution.indexOf(userGuess) === -1 && wrongLetters.indexOf(userGuess) === -1) {
+                            wrongLetters.push(userGuess);
+                            guessesLeft--;
+                            guessesLeftTxt.textContent = "Guesses remaining: " + guessesLeft;
+                        }
+
+                        for (var i = 0; i < solution.length; i++) {
+                            if (userGuess == solution[i]) {
+                                displayWord[i] = solution[i];
+                                correctLetters.push(userGuess);
+                            }
+                        }
+                        
+                        console.log(displayWord.join(''));
+                        console.log(wrongLetters);
+                        hiddenWordtext.textContent = displayWord.join('');
+                        wrongLettersdtext.textContent = wrongLetters;
+
+                        if (correctLetters.length === solution.length) {
+                            alert("You Won!");
+                            wins++;
+                            winsText.textContent = "Wins:" + wins;
+                        }
+                        
+                        else if (correctLetters.lentght !== solution.length && guessesLeft === 0) {
+                            alert("Game Over!");
+                        }
+                        
+                        
+                      
+                    }
+
+                   
+                }
+
             }
 
-                        //         indexes.push(i);
-                        // return indexes;
-                        // console.log(indexes);
+
+                //     console.log('second');
+                // 
+                
+                
+                // if (currentWord.indexOf(userGuess) === -1) {
+                //     lettersGuessed.push(userGuess);
+                //     lettersGuessedtext.textContent = lettersGuessed;
+                //     guessesLeft --;
+                //     guessesRemaining.textContent = "You have " + guessesLeft + " guesses remaining.";
+
+                // }
+                // else if (currentWord.indexOf(userGuess) !== -1) {
+                //     console.log(currentWord.indexOf(userGuess));
+                //     var arrayLength = currentWord.length;
+                //     for(var j = 0; j < arrayLength; j++) {  
+                //             if(currentWord[j]===userGuess) {
+                //             (blindDisplay[j] = userGuess);
+                //             // var newblindDisplay = blindDisplay.replace([j], userGuess);
+                //             // hiddenWordtext.textContent = newblindDisplay;
+                //             };
+                //         }
+
+                //     }
+                // else if (guessesLeft === 0) {
+                //     alert("game over!");
+                //     }
+                // };
+        
+      
             
-            else if (hangman.guessesLeft === 0) {
-            alert("game over!");
-            
-            }
-            }
-
-           };
-
-             
-
-
+           
 
         </script>
 
