@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #cccccc;
+    box-sizing: border-box;
+    background-image: url("../images/Prince_Background.jpg");
+    
+}
+
+#header {
+    text-align: center;
+    padding: 40px;
+}
+
+#gameboard {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    /* padding: 10px; */
+    border-style: dotted;
+    margin: 10px;
+}
+
+#imageSpace {
+    padding: 10px;
+    border-style: dotted;
+    margin: 10px;
+}
+
+#iconP {
+  position: relative;
+  top: 20%;
+  left: 35%;
+}

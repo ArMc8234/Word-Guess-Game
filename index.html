@@ -6,33 +6,37 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>Word Guess Game</title>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12" class="jumbotron">
-                <h1>Prince Hangman</h1>
+            <div class="col-md-12" class="jumbotron jumboton-fluid" id="header">
+                <h1 class="display-2">Prince Hangman</h1>
             </div>
-
-            <div class="row">
-                <div class="col-md-6" id="revealSpace"></div>
-                <div class="col-md-6" id="gameboard">
-                        <div id="dashboard">
-                                <p id="directions-text">Press any key to get started!</p>
-                                <p id="currentWord-text">Guess the word below!</p>
-                                <h1 id ="hiddenWord-text"></h1>
-                                <p id="wins-text"></p>
-                                <p id="guessesRemaining-text">Guesses remaining: 8</p>
-                                <p id="letguess-header">Letters already guessed</p>
-                                <p id="lettersGuessed-text"></p>
-                        </div>
-                </div>
-            </div>
-
         </div>
 
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-md-4" id="imageSpace">
+                   <!-- <img src="http://giphygifs.s3.amazonaws.com/media/Jnj7ptyE7J9II/200w_d.gif" alt="Prince.gif"> -->
+                  <img id="iconP"src="https://media.giphy.com/media/hC4LoLvbsSo2Q/giphy.gif" alt="symbol">
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-md-4" id="gameboard">
+                    <div id="dashboard">
+                            <p id="directions-text">Press any key to get started!</p>
+                            <p id="currentWord-text">Guess the word below!</p><br>
+                            <h1 id ="hiddenWord-text"></h1><br><br>
+                            <p id="wins-text"></p>
+                            <p id="guessesRemaining-text">Guesses remaining: 8</p>
+                            <p id="letguess-header">Letters already guessed</p>
+                            <p id="lettersGuessed-text"></p>
+                    </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
         <script type="text/javascript">
             
 
