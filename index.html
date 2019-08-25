@@ -67,7 +67,7 @@
                 var displayWordCombo = displayWord.join('');
                 hiddenWordtext.textContent = displayWordCombo;
                 
-
+                
                 document.onkeyup = function(event) {
                     
                     console.log("second onkeyup");
@@ -99,8 +99,9 @@
                             winsText.textContent = "Wins:" + wins;
                         }
                         
-                        else if (correctLetters.lentght !== solution.length && guessesLeft === 0) {
+                        else if (guessesLeft == 0) {
                             alert("Game Over!");
+                            hiddenWordtext.textContent = solution;
                         }
                         
                         
