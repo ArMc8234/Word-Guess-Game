@@ -40,7 +40,7 @@
         <script type="text/javascript">
             
 
-        //    <!--Variables for choices, wins, guesses left, and incorrect letters             guessed--!>
+        //    <!--Variables for choices, wins, guesses left, and incorrect letters guessed--!>
             var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
             var wins =  0;
             var guessesLeft = 8;
@@ -99,7 +99,7 @@
                             winsText.textContent = "Wins:" + wins;
                         }
                         
-                        else if (guessesLeft == 0) {
+                        else if (guessesLeft === 0) {
                             alert("Game Over!");
                             hiddenWordtext.textContent = solution;
                         }
@@ -113,36 +113,7 @@
 
             }
 
-
-                //     console.log('second');
-                // 
-                
-                
-                // if (currentWord.indexOf(userGuess) === -1) {
-                //     lettersGuessed.push(userGuess);
-                //     lettersGuessedtext.textContent = lettersGuessed;
-                //     guessesLeft --;
-                //     guessesRemaining.textContent = "You have " + guessesLeft + " guesses remaining.";
-
-                // }
-                // else if (currentWord.indexOf(userGuess) !== -1) {
-                //     console.log(currentWord.indexOf(userGuess));
-                //     var arrayLength = currentWord.length;
-                //     for(var j = 0; j < arrayLength; j++) {  
-                //             if(currentWord[j]===userGuess) {
-                //             (blindDisplay[j] = userGuess);
-                //             // var newblindDisplay = blindDisplay.replace([j], userGuess);
-                //             // hiddenWordtext.textContent = newblindDisplay;
-                //             };
-                //         }
-
-                //     }
-                // else if (guessesLeft === 0) {
-                //     alert("game over!");
-                //     }
-                // };
-        
-      
+     
             
            
 
