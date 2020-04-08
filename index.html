@@ -1,138 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <title>Word Guess Game</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12" class="jumbotron jumboton-fluid" id="header">
-                <h1 class="display-2">Prince Hangman</h1>
-            </div>
+      <audio
+        src="assets/I Wanna Be Your Lover Instrumental Version.mp3"
+        controls
+        autoplay
+      >
+        <!-- <source src="assets/I Wanna Be Your Lover Instrumental Version.mp3" type="audio/mpeg"> -->
+      </audio>
+      <div class="row">
+        <div class="col-md-12" class="jumbotron jumboton-fluid" id="header">
+          <h1 class="display-2">Prince Hangman</h1>
         </div>
+      </div>
 
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-md-4" id="imageSpace">
-                   <!-- <img src="http://giphygifs.s3.amazonaws.com/media/Jnj7ptyE7J9II/200w_d.gif" alt="Prince.gif"> -->
-                  <img id="iconP"src="https://media.giphy.com/media/hC4LoLvbsSo2Q/giphy.gif" alt="symbol">
-            </div>
-            <div class="col-sm-2"></div>
-            <div class="col-md-4" id="gameboard">
-                    <div id="dashboard">
-                            <p id="directions-text">Press any key to get started!</p>
-                            <p id="currentWord-text">Guess the word below!</p><br>
-                            <h1 id ="hiddenWord-text"></h1><br><br>
-                            <p id="wins-text"></p>
-                            <p id="guessesRemaining-text">Guesses remaining: 8</p>
-                            <p id="letguess-header">Letters already guessed</p>
-                            <p id="lettersGuessed-text"></p>
-                    </div>
-            </div>
-            <div class="col-sm-2"></div>
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-md-4" id="imageSpace">
+          <!-- <img src="http://giphygifs.s3.amazonaws.com/media/Jnj7ptyE7J9II/200w_d.gif" alt="Prince.gif"> -->
+          <img
+            id="iconP"
+            src="https://media.giphy.com/media/hC4LoLvbsSo2Q/giphy.gif"
+            alt="symbol"
+          />
         </div>
-        <script type="text/javascript">
-            
+        <div class="col-sm-2"></div>
+        <div class="col-md-4" id="gameboard">
+          <div id="dashboard">
+            <p id="directions-text">Press any key to get started!</p>
+            <p id="currentWord-text">Guess the word below!</p>
+            <br />
+            <h1 id="hiddenWord-text"></h1>
+            <br /><br />
+            <p id="wins-text"></p>
+            <p id="guessesRemaining-text">Guesses remaining: 8</p>
+            <p id="lettersGuessed-header">Letters already guessed</p>
+            <p id="lettersGuessed-text"></p>
+          </div>
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+      <script type="text/javascript">
+        var loader = setInterval(function () {
+          if (document.readyState !== "complete") return;
+          clearInterval(loader);
 
-        //    <!--Variables for choices, wins, guesses left, and incorrect letters guessed--!>
-            var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-            var wins =  0;
-            var guessesLeft = 8;
-            var wrongLetters = [];
-            var correctLetters = [];
-            var puzzles = ["purple rain", "little red corvette","when doves cry","kiss","diamonds and pearls","nineteen ninety nine","raspberry beret","i wanna be your lover", "let's go crazy","controversy","u got the look"];
-         
-            var directionsText = document.getElementById("directions-text");
-            var hiddenWordtext = document.getElementById("hiddenWord-text");
-            var winsText = document.getElementById("wins-text");
-            var guessesLeftTxt = document.getElementById("guessesRemaining-text");
-            var wrongLettersdtext = document.getElementById("lettersGuessed-text");     
-            var hiddenWordtext = document.getElementById("hiddenWord-text");
-          
-         //start game with any key: computer picks a puzzle//
-            document.onkeyup = function(event) {
-                console.log("first onkeyup");
-                var userStart = event.key;
-                
-                var solution = puzzles[Math.floor(Math.random()*puzzles.length)];
-                var displayWord = solution.replace(/[a-zA-Z]/g , '-').split('');
-                console.log(solution);
-                console.log(displayWord);
-                var displayWordCombo = displayWord.join('');
-                hiddenWordtext.textContent = displayWordCombo;
-                
-                
-                document.onkeyup = function(event) {
-                    
-                    console.log("second onkeyup");
-                    var userGuess = event.key;
+        //   Variables for choices, wins, guesses left, and incorrect letters guessed
+          var alphabet = [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z",
+          ];
+          var wins = 0;
+          var guessesLeft = 8;
+          var wrongLetters = [];
+          var correctLetters = [];
+          var puzzles = [
+            "purple rain",
+            "little red corvette",
+            "when doves cry",
+            "kiss",
+            "diamonds and pearls",
+            "nineteen ninety nine",
+            "raspberry beret",
+            "i wanna be your lover",
+            "let's go crazy",
+            "controversy",
+            "u got the look",
+          ];
+          var solution = [];
+          var displayWord = [];
+          var directionsText = document.getElementById("directions-text");
+          var hiddenWordtext = document.getElementById("hiddenWord-text");
+          var winsText = document.getElementById("wins-text");
+          var guessesLeftTxt = document.getElementById("guessesRemaining-text");
+          var wrongLettersText = document.getElementById(
+            "lettersGuessed-text"
+          );
+          var hiddenWordtext = document.getElementById("hiddenWord-text");
 
-                    if (alphabet.includes(userGuess)) {
+          function puzzleSelect(){
+            solution = puzzles[Math.floor(Math.random() * puzzles.length)];
+            displayWord = solution.replace(/[a-zA-Z]/g, "-").split("");
+            console.log(solution);
+            console.log(displayWord);
+            var displayWordCombo = displayWord.join("");
+            hiddenWordtext.textContent = displayWordCombo;
+          };
 
-                        if (solution.indexOf(userGuess) === -1 && wrongLetters.indexOf(userGuess) === -1) {
-                            wrongLetters.push(userGuess);
-                            guessesLeft--;
-                            guessesLeftTxt.textContent = "Guesses remaining: " + guessesLeft;
-                        }
+          function evaluateGuess(Guess){
+            if (
+                  solution.indexOf(Guess) === -1 &&
+                  wrongLetters.indexOf(Guess) === -1
+                ) {
+                  wrongLetters.push(Guess);
+                  console.log("wrong letters in evaluateGuess function:", wrongLetters);
+                  guessesLeft--;
+                  guessesLeftTxt.textContent =
+                    "Guesses remaining: " + guessesLeft;
+                    wrongLettersText.textContent = wrongLetters;
+                        if (guessesLeft === 0) {
+                    hiddenWordtext.textContent = solution;
+                    // var gameOver = alert("Game Over!");
 
-                        for (var i = 0; i < solution.length; i++) {
-                            if (userGuess == solution[i]) {
-                                displayWord[i] = solution[i];
-                                correctLetters.push(userGuess);
-                            }
-                        }
-                        
-                        console.log(displayWord.join(''));
-                        console.log(wrongLetters);
-                        hiddenWordtext.textContent = displayWord.join('');
-                        wrongLettersdtext.textContent = wrongLetters;
 
+                    var tryAgain = confirm("Game Over! Try Again?");
+                    if (tryAgain){
+                        puzzleSelect();
+                    }
+                    }
+                }
+                else{
+                    for (var i = 0; i < solution.length; i++) {
+                      if (Guess == solution[i]) {
+                        displayWord[i] = solution[i];
+                        correctLetters.push(Guess);
+                        hiddenWordtext.textContent = displayWord.join("");
                         if (correctLetters.length === solution.length) {
+                            hiddenWordtext.textContent = displayWord.join("");
                             alert("You Won!");
                             wins++;
                             winsText.textContent = "Wins:" + wins;
+                           var playOn = confirm("Continue?")
+                           if (playOn){
+                               puzzleSelect();
+                           }
                         }
-                        
-                        else if (guessesLeft === 0) {
-                            alert("Game Over!");
-                            hiddenWordtext.textContent = solution;
-                        }
-                        
-                        
-                      
                     }
 
-                   
                 }
 
-            }
-
-     
-            
-           
-
-        </script>
+                // console.log(displayWord.join(""));
+                // console.log(wrongLetters);
 
 
+          };
+        };
+            //start game with any key: computer picks a puzzle//
+            //   document.onkeyup = function (event) {
+            //     console.log("first onkeyup");
+            //     var userStart = event.key;
 
 
+            //   };
+            puzzleSelect();
 
+            document.onkeyup = function (event) {
+            //   console.log("second onkeyup");
+              var userGuess = event.key;
+                console.log("user guess:", userGuess);
+              if (alphabet.includes(userGuess)) {
+                evaluateGuess(userGuess);
 
+            //     if (correctLetters.length === solution.length) {
+            //       alert("You Won!");
+            //       wins++;
+            //       winsText.textContent = "Wins:" + wins;
+            //     } else if (guessesLeft === 0) {
+            //       alert("Game Over!");
+            //       hiddenWordtext.textContent = solution;
+            //     }
+              }
+            };
 
-
-
-
-
-
-
-
-
+        }, 300);
+      </script>
     </div>
-</body>
+  </body>
 </html>
